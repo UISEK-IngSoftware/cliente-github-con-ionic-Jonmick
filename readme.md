@@ -3,9 +3,9 @@
 
 ## Información del Estudiante
 
-- **Nombre:** [Tu nombre completo aquí]
-- **Carrera:** [Tu carrera]
-- **Fecha de inicio:** [Fecha]
+- **Nombre:** Jonathan Tituaña
+- **Carrera:** Ing. en Software
+- **Fecha de inicio:** 04/12/2025
 
 ---
 
