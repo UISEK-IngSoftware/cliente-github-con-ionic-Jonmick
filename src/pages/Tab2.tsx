@@ -1,6 +1,7 @@
 import { IonButton, IonContent, IonHeader, IonPage, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
 import { IonInput } from '@ionic/react';
 import { useHistory } from 'react-router';
+import React from 'react';
 import { RepositoryItem } from '../interfaces/RepositoryItem';
 import { createRepository } from '../services/GithubService';
 import './Tab2.css';
@@ -8,35 +9,45 @@ import './Tab2.css';
 
 const Tab2: React.FC = () => {
   const history = useHistory();
-
-  const repoFormData : RepositoryItem = {
+  const [repoFormData, setRepoFormData] = React.useState<RepositoryItem>({
     name: '',
     description: '',
     imageUrl: null,
     owner: null,
     language: null,
-  };
+  });
 
   const setRepoName = (value: string) => {
-    repoFormData.name = value;
+    setRepoFormData(prev => ({ ...prev, name: value }));
   }
 
   const setDescription = (value: string) => {
-    repoFormData.name = value;
+    setRepoFormData(prev => ({ ...prev, description: value }));
   }
 
-  const saveRepo = () => {
-    console.log("Guardando repositorio:", repoFormData);
+  const saveRepo = async () => {
     if (repoFormData.name.trim() === '') {
       alert('El nombre del repositorio es obligatorio');
       return;
     }
-    createRepository(repoFormData).then(() => {
-      history.push('/tab1');
-    }).catch((error) => {
-      console.error('Error al crear el repositorio:', error);
-      alert('Error al crear el repositorio');
-    });
+    
+    console.log('Intentando crear repositorio:', repoFormData);
+    
+    try {
+      await createRepository(repoFormData);
+      console.log('Repositorio creado exitosamente');
+      
+      setRepoFormData({
+        name: '',
+        description: '',
+        imageUrl: null,
+        owner: null,
+        language: null,
+      });
+      history.replace('/tab1');
+    } catch (error) {
+      console.log('Error al crear:', error);
+    }
   };
 
   return (

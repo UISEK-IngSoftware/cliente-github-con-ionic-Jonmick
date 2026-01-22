@@ -1,0 +1,18 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.empty-card {
+  margin: 10px;
+  text-align: center;
+}
+
+.modal-content {
+  padding: 16px;
+}
+
+.modal-field {
+  margin-bottom: 16px;
+}
